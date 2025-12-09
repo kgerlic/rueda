@@ -182,3 +182,47 @@ a:hover {
     margin-top: 2px;
 }
 
+/* Ogólna wielkość tekstu na komputerze */
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Nagłówek i tabela – bazowo */
+h2 {
+    font-size: 24px;
+}
+
+.table-wrapper table {
+    font-size: 16px;
+}
+
+.fig-sub {
+    font-size: 12px;
+    color: #666;
+}
+
+/* Większe litery na telefonach */
+@media (max-width: 768px) {
+    body {
+        font-size: 18px;      /* cały tekst większy */
+    }
+
+    h2 {
+        font-size: 22px;      /* nagłówek trochę mniejszy niż na desktopie, ale nadal czytelny */
+    }
+
+    .table-wrapper table {
+        font-size: 17px;      /* większy tekst w tabeli */
+    }
+
+    .fig-sub {
+        font-size: 14px;      /* podpisy pod figurami też większe */
+    }
+
+    /* Opcjonalnie trochę luzu po bokach na małym ekranie */
+    .page-wrapper {
+        padding: 10px;
+    }
+}
