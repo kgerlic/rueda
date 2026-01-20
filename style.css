@@ -1,187 +1,218 @@
-/* ---------- Zmienne kolorów – taneczny klimat ---------- */
+/* =========================================================
+   style.css — Rueda de Casino (ciemny „latino” klimat)
+   - czerwone nazwy figur
+   - niebieskie tłumaczenia PL
+   - czerwony pasek nagłówka tabeli
+   - mobile-first + czytelność
+   ========================================================= */
+
+/* ---------- Zmienne kolorów ---------- */
 :root {
-    --bg: #050816;           /* tło strony */
-    --bg-card: rgba(15, 23, 42, 0.92);
-    --accent: #f97316;       /* pomarańcz – żywy, „latino” */
-    --accent-soft: rgba(249, 115, 22, 0.15);
-    --text-main: #e5e7eb;
-    --text-muted: #9ca3af;
-    --border-soft: rgba(148, 163, 184, 0.35);
+  --bg: #050816;                  /* tło strony */
+  --bg-card: rgba(15, 23, 42, 0.92);
+  --bg-row-alt: rgba(15, 23, 42, 0.60);
+
+  --accent: #ee0000;              /* główny akcent (czerwony) */
+  --accent-soft: rgba(238, 0, 0, 0.14);
+
+  --text-main: #e5e7eb;
+  --text-muted: #9ca3af;
+  --border-soft: rgba(148, 163, 184, 0.35);
+
+  --pl-sub: #0050f0;              /* kolor polskich tłumaczeń */
+  --radius: 18px;
 }
 
 /* ---------- Reset podstawowy ---------- */
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 /* ---------- Tło i podstawowa typografia ---------- */
 body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background:
-        radial-gradient(circle at top left, #1f2937 0, transparent 55%),
-        radial-gradient(circle at bottom right, #111827 0, transparent 55%),
-        var(--bg);
-    color: var(--text-main);
-    line-height: 1.6;
-    padding: 24px 12px;
-    font-size: 16px;      /* bazowy rozmiar tekstu na dużych ekranach */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at top left, #1f2937 0, transparent 55%),
+    radial-gradient(circle at bottom right, #111827 0, transparent 55%),
+    var(--bg);
+  color: var(--text-main);
+  line-height: 1.6;
+
+  padding: 24px 12px;
+  font-size: 16px;
 }
 
-/* ---------- Główne pudełko na treść ---------- */
+/* ---------- Główne pudełko ---------- */
 .page-wrapper {
-    max-width: 960px;
-    margin: 0 auto;
-    background: var(--bg-card);
-    border-radius: 18px;
-    box-shadow:
-        0 18px 45px rgba(0, 0, 0, 0.6),
-        0 0 0 1px rgba(148, 163, 184, 0.3);
-    padding: 24px 24px 32px;
-    backdrop-filter: blur(12px);
+  max-width: 980px;
+  margin: 0 auto;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.60),
+    0 0 0 1px rgba(148, 163, 184, 0.30);
+
+  padding: 24px 24px 32px;
+  backdrop-filter: blur(12px);
 }
 
 /* ---------- Nagłówek ---------- */
 .page-wrapper h2 {
-    font-size: 1.9rem;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    position: relative;
+  font-size: 1.9rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  position: relative;
 }
 
 .page-wrapper h2::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -8px;
-    width: 68px;
-    height: 3px;
-    border-radius: 999px;
-    background: linear-gradient(90deg, var(--accent), transparent);
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 72px;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+}
+
+/* ---------- Wrapper tabeli ---------- */
+.table-wrapper {
+  margin-top: 24px;
+  overflow-x: auto; /* na telefonach można przewijać w bok */
 }
 
 /* ---------- Tabela ---------- */
-
-.table-wrapper {
-    margin-top: 24px;
-    overflow-x: auto;               /* na telefonach można przewijać w bok */
-}
-
-/* usuń domyślne obramowanie HTML-a */
 table {
-    width: 100%;
-    border-collapse: collapse;
-    border-spacing: 0;
-    min-width: 420px;               /* żeby kolumny nie były za wąskie */
-    font-size: 16px;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+
+  min-width: 520px;   /* żeby kolumny nie były za wąskie */
+  font-size: 16px;
 }
 
-/* Nagłówki tabeli */
+/* Wiersz nagłówka tabeli (pasek na górze) */
+/* Nagłówek tabeli: ciemne tło + wąski pasek */
 table thead th,
 table > tbody > tr:first-child > th {
-    /* na wypadek, gdyby nie było <thead> */
-    background: linear-gradient(
-        135deg,
-        rgba(15, 23, 42, 0.9),
-        rgba(15, 23, 42, 0.9)
-    );
-    border-bottom: 2px solid var(--accent);
-    text-align: left;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text-muted);
+  background: rgba(15, 23, 42, 0.92);     /* ciemny granat */
+  border-bottom: 2px solid #ee0000;       /* czerwony akcent */
+  color: #e5e7eb;                          /* jasny tekst */
+  text-align: left;
+
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+
+  padding: 6px 14px;                       /* WĘŻSZY pasek */
 }
 
-/* Komórki */
+
+
+
+/* Komórki tabeli */
 th,
 td {
-    padding: 10px 14px;
-    border-bottom: 1px solid var(--border-soft);
-    vertical-align: top;
-    font-size: 0.95rem;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border-soft);
+  vertical-align: top;
+  font-size: 0.95rem;
 }
 
 /* Co druga linia lekko przyciemniona */
 tbody tr:nth-child(even) {
-    background-color: rgba(15, 23, 42, 0.6);
+  background-color: var(--bg-row-alt);
 }
 
-/* Efekt „podświetlenia” wiersza po najechaniu */
+/* Hover na wierszu (bez przesuwania layoutu) */
 tbody tr:hover {
-    background-color: var(--accent-soft);
-    transform: translateY(-1px);
-    transition:
-        background-color 0.18s ease,
-        transform 0.18s ease;
+  background-color: var(--accent-soft);
+  transition: background-color 0.18s ease;
 }
 
 /* Kolumna z nazwą figury */
 td:first-child {
-    width: 26%;
-    font-weight: 600;
+  width: 26%;
+  font-weight: 600;
 }
 
-/* Nazwa figury – wyróżniona (pomarańcz/czerwonawy) */
+/* Nazwa figury */
 td:first-child b {
-    font-size: 1.02rem;
-    color: var(--accent);
+  display: inline-block;
+  font-size: 1.02rem;
+  color: var(--accent);
 }
 
-/* Podpisy/tłumaczenia nazw figur (mały tekst pod nazwą) */
+/* Polskie tłumaczenie pod nazwą */
 .fig-sub,
 td:first-child span {
-    display: block;
-    font-size: 0.78rem;
-    color: var(--text-muted);
-    margin-top: 2px;
+  display: block;
+  font-size: 0.80rem;
+  color: #66a3ff;
+  margin-top: 2px;
+  font-weight: 500;
 }
 
-/* Kolumna z opisem – trochę więcej „powietrza” */
+/* Kolumna z opisem */
 td:nth-child(2) {
-    line-height: 1.5;
+  line-height: 1.5;
+}
+
+/* Superskrypty (np. 1800) czytelniejsze */
+sup {
+  font-size: 0.75em;
+  line-height: 0;
 }
 
 /* ---------- Linki ---------- */
 a {
-    color: var(--accent);
-    text-decoration: none;
+  color: var(--accent);
+  text-decoration: none;
 }
 
 a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
-/* ---------- Responsywność (telefony / małe ekrany) ---------- */
+/* ---------- Dodatkowa czytelność na małych ekranach ---------- */
 @media (max-width: 768px) {
-    body {
-        font-size: 18px;   /* większy tekst ogólnie na telefonie */
-    }
+  body {
+    font-size: 18px;
+    padding: 18px 10px;
+  }
 
-    .page-wrapper {
-        padding: 18px 14px 24px;
-        border-radius: 14px;
-    }
+  .page-wrapper {
+    padding: 18px 14px 24px;
+    border-radius: 14px;
+  }
 
-    .page-wrapper h2 {
-        font-size: 1.4rem;
-    }
+  .page-wrapper h2 {
+    font-size: 1.4rem;
+  }
 
-    th,
-    td {
-        padding: 8px 10px;
-        font-size: 0.95rem;   /* trochę większe komórki na małym ekranie */
-    }
+  table {
+    min-width: 480px; /* trochę mniejsze minimum */
+    font-size: 17px;
+  }
 
-    table {
-        font-size: 17px;      /* cała tabela ciut większa */
-    }
+  th,
+  td {
+    padding: 9px 10px;
+    font-size: 0.98rem;
+  }
 
-    .fig-sub {
-        font-size: 0.9rem;    /* podpisy też większe */
-    }
+  td:first-child b {
+    font-size: 1.05rem;
+  }
+
+  .fig-sub,
+  td:first-child span {
+    font-size: 0.92rem;
+  }
 }
