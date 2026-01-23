@@ -1,9 +1,11 @@
 /* =========================================================
    style.css — Rueda de Casino (ciemny „latino” klimat)
-   - czerwone nazwy figur
-   - niebieskie tłumaczenia PL
-   - czerwony pasek nagłówka tabeli
-   - mobile-first + czytelność
+   Założenia (wg Twoich wymagań):
+   - Nazwy figur: niebieskie
+   - Tłumaczenia PL: jasne/białe
+   - Nagłówek tabeli (górny wiersz): jak reszta tabeli (bez czerwonego tła)
+   - Pasek pod tytułem strony: usunięty
+   - Linie/separatory między wierszami: czerwone (klimat flagi/loga Kuby)
    ========================================================= */
 
 /* ---------- Zmienne kolorów ---------- */
@@ -12,14 +14,16 @@
   --bg-card: rgba(15, 23, 42, 0.92);
   --bg-row-alt: rgba(15, 23, 42, 0.60);
 
-  --accent: #ee0000;              /* główny akcent (czerwony) */
-  --accent-soft: rgba(238, 0, 0, 0.14);
-
   --text-main: #e5e7eb;
-  --text-muted: #9ca3af;
   --border-soft: rgba(148, 163, 184, 0.35);
 
-  --pl-sub: #0050f0;              /* kolor polskich tłumaczeń */
+  --accent: #e5e7eb;              /* linki / neutralny akcent */
+  --accent-soft: rgba(238, 0, 0, 0.14);
+
+  --figure-name: #3b82f6;         /* NIEBIESKIE nazwy figur */
+  --pl-sub: #ffffff;              /* BIAŁE tłumaczenia PL */
+
+  --row-sep: #dc2626;             /* CZERWONE separatory wierszy */
   --radius: 18px;
 }
 
@@ -70,15 +74,9 @@ body {
   position: relative;
 }
 
+/* USUNIĘTY pasek pod tytułem strony */
 .page-wrapper h2::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -8px;
-  width: 72px;
-  height: 3px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--accent), transparent);
+  content: none;
 }
 
 /* ---------- Wrapper tabeli ---------- */
@@ -97,30 +95,26 @@ table {
   font-size: 16px;
 }
 
-/* Wiersz nagłówka tabeli (pasek na górze) */
-/* Nagłówek tabeli: ciemne tło + wąski pasek */
+/* Wiersz nagłówka tabeli (ma wyglądać jak reszta tabeli) */
 table thead th,
 table > tbody > tr:first-child > th {
-  background: rgba(15, 23, 42, 0.92);     /* ciemny granat */
-  border-bottom: 2px solid #ee0000;       /* czerwony akcent */
-  color: #e5e7eb;                          /* jasny tekst */
+  background: var(--bg-card);               /* jak reszta */
+  color: var(--text-main);
   text-align: left;
 
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 
-  padding: 6px 14px;                       /* WĘŻSZY pasek */
+  padding: 6px 14px;                        /* węższy pasek */
+  border-bottom: 2px solid var(--row-sep);  /* czerwony separator pod nagłówkiem */
 }
-
-
-
 
 /* Komórki tabeli */
 th,
 td {
   padding: 10px 14px;
-  border-bottom: 1px solid var(--border-soft);
+  border-bottom: 2px solid var(--row-sep);  /* czerwone separatory między wierszami */
   vertical-align: top;
   font-size: 0.95rem;
 }
@@ -130,9 +124,9 @@ tbody tr:nth-child(even) {
   background-color: var(--bg-row-alt);
 }
 
-/* Hover na wierszu (bez przesuwania layoutu) */
+/* Hover na wierszu (delikatny czerwony, nie zasłania separatorów) */
 tbody tr:hover {
-  background-color: var(--accent-soft);
+  background-color: rgba(220, 38, 38, 0.08);
   transition: background-color 0.18s ease;
 }
 
@@ -142,19 +136,19 @@ td:first-child {
   font-weight: 600;
 }
 
-/* Nazwa figury */
+/* Nazwa figury — NIEBIESKA */
 td:first-child b {
   display: inline-block;
   font-size: 1.02rem;
-  color: var(--accent);
+  color: var(--figure-name);
 }
 
-/* Polskie tłumaczenie pod nazwą */
+/* Polskie tłumaczenie pod nazwą — BIAŁE */
 .fig-sub,
 td:first-child span {
   display: block;
   font-size: 0.80rem;
-  color: #66a3ff;
+  color: var(--pl-sub);
   margin-top: 2px;
   font-weight: 500;
 }
@@ -197,7 +191,7 @@ a:hover {
   }
 
   table {
-    min-width: 480px; /* trochę mniejsze minimum */
+    min-width: 480px;
     font-size: 17px;
   }
 
@@ -205,6 +199,7 @@ a:hover {
   td {
     padding: 9px 10px;
     font-size: 0.98rem;
+    border-bottom-width: 2px;
   }
 
   td:first-child b {
@@ -217,25 +212,24 @@ a:hover {
   }
 }
 
-
-.page-title{
+/* ---------- Nagłówek z ikoną player (jeśli używasz w HTML) ---------- */
+.page-title {
   display: flex;
   align-items: center;   /* wyrównanie w pionie */
   gap: 10px;
-  line-height: 1.2;      /* ważne: stabilizuje wysokość nagłówka */
+  line-height: 1.2;      /* stabilizuje wysokość nagłówka */
   margin: 0;
 }
 
-.player-link{
+.player-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  /* opcjonalnie, żeby link nie "rozpychał" nagłówka */
-  flex: 0 0 auto;
-  transform: translateY(1px); /* mikro-korekta, gdyby dalej było minimalnie za wysoko */
+  flex: 0 0 auto;        /* link nie rozpycha nagłówka */
+  transform: translateY(1px);
 }
 
-.player-link img{
+.player-link img {
   display: block;        /* usuwa baseline/odstęp pod obrazkiem */
 }
